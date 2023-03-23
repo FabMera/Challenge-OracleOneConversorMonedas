@@ -2,7 +2,6 @@ import conversor_monedas.ConversionOption;
 import conversor_temp.ConversionOptionTemp;
 
 import javax.swing.*;
-import java.sql.SQLOutput;
 import java.util.Objects;
 
 public class Main {
@@ -11,14 +10,21 @@ public class Main {
 
         ConversionOption conversion = new ConversionOption();
         ConversionOptionTemp conversionT = new ConversionOptionTemp();
+
+
         Object[] menu = {"Conversor de Monedas", "Conversor de Temperatura"};
+        JComboBox jComboBox = new JComboBox(menu);
         boolean respuesta = true;
 
         while (respuesta) {
+/*
             String options = JOptionPane.showInputDialog(null, "Seleccione una opcion para convertir", "Menu Conversion", JOptionPane.QUESTION_MESSAGE, null, menu, "Seleccionar").toString();
+*/
+           JOptionPane.showMessageDialog(null, jComboBox, "Conversion", JOptionPane.QUESTION_MESSAGE);
 
             try {
-                if (Objects.equals(options, "Conversor de Monedas")) {
+
+                if (jComboBox.getSelectedItem().toString().equalsIgnoreCase("Conversor de Monedas")  ) {
 
                     String input = JOptionPane.showInputDialog(null, "Ingrese el valor $ a convertir");
                     double valor = Double.parseDouble(input);
@@ -30,7 +36,7 @@ public class Main {
                         JOptionPane.showMessageDialog(null, "Haz salido del programa");
                         respuesta = false;
                     }
-                } else if (Objects.equals(options, "Conversor de Temperatura ")) {
+                } else if (jComboBox.getSelectedItem().toString().equalsIgnoreCase("Conversor de Temperatura") ) {
                     String input = JOptionPane.showInputDialog(null, "Ingrese el valor °T que desea convertir");
                     double valorT = Double.parseDouble(input);
                     conversionT.conversionDeTemp(valorT);
@@ -46,7 +52,6 @@ public class Main {
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Debes ingresar solo NÚMEROS");
                 System.out.println(ex);
-                respuesta = true;
 
             }
         }
